@@ -1,217 +1,249 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oi Maju :) </title>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            background-color: #4a5d4c;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Fira Code', monospace;
-            overflow: hidden;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vinicius Sena</title>
 
-        h2, h3 {
-            color: white;
-            font-family: 'Fira Code', monospace;
-            text-align: center;
-            margin: 10px 0;
-        }
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
-        h2 {
-            font-size: 2em;
-            
-        }
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Fira Code', monospace;
+      background-color: #4a5d4c;
+      color: #e6ede7;
+    }
 
-        h3 {
-            font-size: 1.5em;
-            margin-bottom: 111px;
-        }
+    header {
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        /* Texto acima dos emojis */
-        h5 {
-            color: white;
-            font-family: 'Fira Code', monospace;
-            font-size: 1.2em;
-            text-align: center;
-            margin: 10px 0;
-        }
-        .emoji-button {
-            font-size: 5em;
-            cursor: pointer;
-            transition: opacity 0.5s;
-            margin: 10px;
-            position: relative;
-        }
-        .letter-container {
-            display: none;
-            width: 60vw;
-            max-width: 105mm;
-            height: calc(60vw * 1.414);
-            max-height: 148mm;
-            background: #f8f8f8;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: auto;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
-            animation: grow 0.5s forwards;
-            text-align: center;
-        }
-        .letter-content {
-            font-family: 'Fira Code', monospace !important;
-            font-size: 12px;
-            line-height: 1.5;
-            color: black !important;
-            text-align: left;
-        }
-        .back-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4a5d4c;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        .back-button:hover {
-            background-color: #3b4b3c;
-        }
-        @media (max-width: 600px) {
-            .letter-container {
-                width: 80vw;
-                height: calc(80vw * 1.414);
-            }
-        }
-        @keyframes grow {
-            to {
-                transform: translate(-50%, -50%) scale(1);
-            }
-        }
-        .emoji {
-            position: absolute;
-            font-size: 2em;
-            animation: explode 3s ease-out forwards;
-        }
-        /* Animação de explosão */
-        @keyframes explode {
-            0% {
-                transform: translate(0, 0);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--x), var(--y));
-                opacity: 0;
-            }
-        }
-    </style>
+    nav a {
+      color: #d2e3d4;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    main.top-align {
+      align-items: flex-start;
+      padding-top: 3rem;
+    }
+
+    .welcome {
+      display: none;
+      max-width: 700px;
+    }
+
+    .welcome.active {
+      display: block;
+    }
+
+    .welcome h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .welcome .subtitle {
+      font-size: 1.1rem;
+      color: #b8ccba;
+      margin-bottom: 1rem;
+    }
+
+    .welcome .description {
+      font-size: 0.95rem;
+      color: #c7d3c8;
+      line-height: 1.7;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+      margin-top: 1.2rem;
+    }
+
+    .tag {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #d2e3d4;
+    }
+
+    .section {
+      display: none;
+      max-width: 700px;
+      text-align: center;
+      width: 100%;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .sobre-content {
+      text-align: left;
+      line-height: 1.8;
+    }
+
+    .sobre-content h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .sobre-content p {
+      margin-bottom: 1rem;
+      color: #d2e3d4;
+    }
+
+    .sobre-content .highlight {
+      color: #e6ede7;
+      font-weight: 500;
+    }
+
+    .contato-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      align-items: center;
+    }
+
+    .contato-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: #d2e3d4;
+      text-decoration: none;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      width: 280px;
+      transition: background 0.2s;
+    }
+
+    .contato-links a:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      color: #c7d3c8;
+    }
+  </style>
 </head>
 <body>
 
-    <!-- Texto acima do emoji de carta -->
-    <div class="emoji-button" onclick="openLetter('letter')">✉️</div>
-    
-    <div class="letter-container" id="letterContainer">
-        <div class="letter-content" id="letterContent">
-        </div>
-        <button class="back-button" onclick="closeLetter()">Voltar</button>
+  <header>
+    <div>Vinicius Sena</div>
+    <nav>
+      <a onclick="showSection('welcome')">Início</a>
+      <a onclick="showSection('posts')">Posts</a>
+      <a onclick="showSection('projetos')">Projetos</a>
+      <a onclick="showSection('contato')">Contato</a>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <div id="welcome" class="welcome active">
+      <h1>Bem vindo.</h1><p><h2>Sou o Vini 🤟</h2>
+      <p class="subtitle">Analista de Observabilidade → DevOps/SRE</p>
+      <p class="description">
+        Aqui documento minha jornada de transição para DevOps/SRE — estudos, projetos práticos e reflexões sobre tecnologia e carreira.
+      </p>
+      <div class="tags">
+        <span class="tag">Linux</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Kubernetes</span>
+        <span class="tag">Terraform</span>
+        <span class="tag">Grafana</span>
+        <span class="tag">Datadog</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">AWS</span>
+      </div>
     </div>
 
-    <script>
-        function openLetter(type) {
-            document.querySelectorAll('.emoji-button').forEach(emoji => {
-                emoji.style.opacity = '0';
-                setTimeout(() => {
-                    emoji.style.display = 'none';
-                }, 500);
-            });
-            
-            const letterContainer = document.getElementById('letterContainer');
-            const letterContent = document.getElementById('letterContent');
-            
-            if (type === 'letter') {
-                letterContent.innerHTML = `
+    <div id="posts" class="section">
+      <h2>Posts</h2>
+      <p>Em breve vou começar a publicar meus estudos e reflexões aqui.</p>
+    </div>
 
-                <p>Oi, Maju. Tudo bem?</p>
+    <div id="projetos" class="section">
+      <h2>Projetos</h2>
+      <p>Aqui vou compartilhar projetos práticos que estou desenvolvendo.</p>
+    </div>
 
-                <p>Imagino que você possa achar meio aleatório eu te escrever isso agora.</p>
-                <p>Vou ser sincero: eu senti vontade de te escrever mais uma vez. Eu sinto falta disso.</p>
+    <div id="contato" class="section">
+      <h2>Contato</h2>
+      <p style="color:#c7d3c8; margin-bottom: 0.5rem;">Bora trocar uma ideia? Me encontro por aqui:</p>
+      <div class="contato-links">
+        <a href="http://linkedin.com/in/viniciussena000" target="_blank">
+          <i class="fa-brands fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="https://github.com/viniciussenaa" target="_blank">
+          <i class="fa-brands fa-github"></i> GitHub
+        </a>
+        <a href="https://discord.com/users/360037949141811201" target="_blank">
+          <i class="fa-brands fa-discord"></i> Discord
+        </a>
+        <a href="mailto:viniciussena000@gmail.com">
+          <i class="fa-solid fa-envelope"></i> viniciussena000@gmail.com
+        </a>
+      </div>
+    </div>
 
-                <p>Tenho refletido muito sobre a minha vida e sobre tudo que vivemos, e senti vontade de te agradecer, não só pelos momentos, mas por tudo que aprendi com eles.</p>
+  </main>
 
-                <p>Quando eu paro pra lembrar de tudo, vejo o quanto vivemos bons momentos.</p>
+  <footer>
+    <p>© 2026 Vinicius Sena</p>
+  </footer>
 
-                <p>Obrigado por ter me convidado pra hamburgada e por topar os churrascos do Andrei, até os mais cansativos (lembra daquela virada de ano?). Muito obrigado por me levar à sua igreja e ter paciência com meu tempo de adaptação a uma nova visão de fé. Obrigado por me acompanhar no overmission.</p>
+  <script>
+    function showSection(sectionId) {
+      const welcome = document.getElementById('welcome');
+      const sections = document.querySelectorAll('.section');
+      const main = document.getElementById('main');
 
-                <p>Tem lembranças que eu nunca vou esquecer. A viagem da Pedra da Macela, que foi um dos rolês mais marcantes da minha vida, apesar do sufoco pra subir aquilo (eu lembro e dou risada). O passeio de patinete do posto até a sua casa. A surpresa que você preparou pra irmos no beco hexagonal. Coisas simples, mas que dizem muito pra mim.</p>
+      // esconde tudo
+      welcome.classList.remove('active');
+      sections.forEach(sec => sec.classList.remove('active'));
 
-                <p>Sou muito grato pela carta que você me escreveu em um aniversário de namoro e pelos presentes cheios de significado. Aquele mini quadro com a foto que você tirou de mim no pôr do sol, no deck da Anchieta, e a nossa foto da hamburgada estão entre as minhas favoritas.</p>
+      // mostra apenas a seção clicada
+      if (sectionId === 'welcome') {
+        welcome.classList.add('active');
+        main.classList.remove('top-align');
+      } else {
+        document.getElementById(sectionId).classList.add('active');
+        main.classList.add('top-align');
+      }
+    }
+  </script>
 
-                <p>Obrigado pelos conselhos sobre a vida e sobre o meu trabalho, por me incentivar a estudar e a cuidar de mim, por descer antes do ponto só pra passar no meu trabalho e me dar um oi, por me chamar pra passar o Natal com a sua família, por me apresentar lugares novos e pelas orações pelo meu pai. Mesmo cansada, você sempre dava um jeito de ter um tempinho pra mim, e isso significava muito pra mim.</p>
-
-                <p>Cada gesto seu acabou me ensinando alguma coisa. Quando você me escreveu a carta, apareceu no meu trabalho ou me ouviu falar da vida, eu aprendi um pouco mais sobre amor. Nos seus conselhos, aprendi sobre bondade. No seu perdão, aprendi sobre compreensão. Na sua paciência comigo, aprendi a ter calma. E quando te via fazendo o que era certo, eu aprendia sobre determinação e força.</p>
-
-                <p>Tenho incontáveis motivos pra te agradecer. Você é uma das pessoas mais incríveis que já conheci, e eu sempre vou admirar quem você é. Você foi muito boa pra mim, e eu queria ter sido melhor pra você.</p>
-
-                <p>Eu sei que errei e que te machuquei, e penso muito nisso. Gostaria de ter a chance de reconquistar a sua confiança e agir de forma diferente. Ainda assim, entendo que, da forma como tudo aconteceu, isso pode não ser possível, e eu respeito isso.</p>
-
-                <p>Guardo tudo que foi bom com muito carinho. Mesmo de longe, vou sempre torcer por você. Fiquei muito feliz quando você me contou que começou a nova faculdade, e espero, do fundo do meu coração, que tudo dê certo na sua vida. Em nome de Jesus, vai dar.</p>
-
-                <p>Obrigado por ser quem você é.</p>
-
-                <p>Não precisa me responder. Eu só queria te falar tudo isso.</p>
-
-                <p>Com carinho,  </p>
-                <p>Vini.</p>`;
-            }
-            
-            letterContainer.style.display = 'block';
-            letterContainer.style.animation = 'grow 0.5s forwards';
-
-            // Chama a função para adicionar os emojis
-            addEmojis();
-        }
-
-        function closeLetter() {
-            const letterContainer = document.getElementById('letterContainer');
-            letterContainer.style.display = 'none';
-            
-            document.querySelectorAll('.emoji-button').forEach(emoji => {
-                emoji.style.display = 'block';
-                setTimeout(() => {
-                    emoji.style.opacity = '1';
-                }, 100);
-            });
-        }
-
-        function addEmojis() {
-            const emojis = ['', '', '', ''];
-            const letterContainer = document.getElementById('letterContainer');
-            const rect = letterContainer.getBoundingClientRect();
-            for (let i = 0; i < 20; i++) {
-                const emoji = document.createElement('div');
-                emoji.className = 'emoji';
-                emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
-                emoji.style.left = `${rect.left + rect.width / 2}px`;
-                emoji.style.top = `${rect.top + rect.height / 2}px`;
-                emoji.style.setProperty('--x', `${Math.random() * window.innerWidth - window.innerWidth / 2}px`);
-                emoji.style.setProperty('--y', `${Math.random() * window.innerHeight - window.innerHeight / 2}px`);
-                document.body.appendChild(emoji);
-                setTimeout(() => {
-                    emoji.remove();
-                }, 4000);
-            }
-        }
-    </script>
 </body>
 </html>
