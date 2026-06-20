@@ -1,249 +1,262 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vinicius Sena</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>viniciussena@Vini: ~</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --term-bg: #0a0e14;
+    --header-bg: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --muted: #8b949e;
+    --green: #3fb950;
+    --green-bright: #56d364;
+    --blue: #58a6ff;
+    --cyan: #39c5cf;
+    --purple: #bc8cff;
+    --orange: #ffa657;
+    --yellow: #e3b341;
+    --prompt: #7ee787;
+    --red: #ff7b72;
+  }
 
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Fira Code', monospace;
-      background-color: #4a5d4c;
-      color: #e6ede7;
-    }
+  body {
+    background: var(--bg);
+    font-family: "SFMono-Regular", "JetBrains Mono", "Fira Code", Consolas, "Courier New", monospace;
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    line-height: 1.65;
+    background-image:
+      radial-gradient(circle at 20% 20%, rgba(88,166,255,0.06), transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(126,231,135,0.05), transparent 40%);
+  }
 
-    header {
-      padding: 1.5rem 2rem;
-      border-bottom: 1px solid rgba(255,255,255,0.15);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+  .terminal {
+    width: 100%;
+    max-width: 860px;
+    background: var(--term-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+    overflow: hidden;
+  }
 
-    nav a {
-      color: #d2e3d4;
-      margin-left: 1.5rem;
-      text-decoration: none;
-      cursor: pointer;
-    }
+  /* Title bar */
+  .titlebar {
+    background: var(--header-bg);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+    user-select: none;
+  }
+  .tabname {
+    color: var(--muted);
+    font-size: 13px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tabname .pwd { color: var(--prompt); }
+  .controls { display: flex; gap: 8px; }
+  .dot {
+    width: 12px; height: 12px; border-radius: 50%;
+    display: inline-block;
+  }
+  .dot.r { background: #ff5f56; }
+  .dot.y { background: #ffbd2e; }
+  .dot.g { background: #27c93f; }
+  .lang-toggle {
+    color: var(--muted);
+    font-size: 12px;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 2px 8px;
+    cursor: pointer;
+    background: transparent;
+    font-family: inherit;
+  }
+  .lang-toggle:hover { color: var(--green); border-color: var(--green); }
 
-    nav a:hover {
-      text-decoration: underline;
-    }
+  /* Body */
+  .screen {
+    padding: 26px 28px 34px;
+    font-size: 14.5px;
+  }
 
-    main {
-      min-height: calc(100vh - 80px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
+  .prompt-line {
+    margin-top: 26px;
+    color: var(--muted);
+  }
+  .prompt-line:first-child { margin-top: 0; }
+  .user { color: var(--prompt); }
+  .path { color: var(--blue); }
+  .dollar { color: var(--muted); }
+  .cmd { color: var(--text); }
 
-    main.top-align {
-      align-items: flex-start;
-      padding-top: 3rem;
-    }
+  .output { margin-top: 6px; margin-left: 2px; }
 
-    .welcome {
-      display: none;
-      max-width: 700px;
-    }
+  h1.name {
+    font-size: 20px;
+    color: var(--green-bright);
+    margin-bottom: 2px;
+    font-weight: 700;
+  }
+  .role { color: var(--cyan); margin-bottom: 12px; }
 
-    .welcome.active {
-      display: block;
-    }
+  .kv { margin: 2px 0; }
+  .kv .label { color: var(--muted); display: inline-block; min-width: 110px; }
+  .kv a { color: var(--blue); text-decoration: none; }
+  .kv a:hover { text-decoration: underline; color: var(--green-bright); }
 
-    .welcome h1 {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
+  .desc { color: var(--text); max-width: 680px; margin-top: 10px; }
+  .desc em { color: var(--orange); font-style: normal; }
 
-    .welcome .subtitle {
-      font-size: 1.1rem;
-      color: #b8ccba;
-      margin-bottom: 1rem;
-    }
+  /* stack table */
+  .stack-row { display: flex; gap: 14px; margin: 4px 0; flex-wrap: wrap; }
+  .stack-row .cat { color: var(--purple); min-width: 150px; display: inline-block; }
+  .stack-row .vals { color: var(--text); }
+  .dotsep { color: var(--muted); }
 
-    .welcome .description {
-      font-size: 0.95rem;
-      color: #c7d3c8;
-      line-height: 1.7;
-    }
+  /* experience */
+  .exp-title { color: var(--green-bright); font-weight: 600; }
+  .exp-meta { color: var(--muted); font-size: 13px; margin-bottom: 6px; }
+  .exp-item { margin: 6px 0; padding-left: 18px; position: relative; max-width: 700px; }
+  .exp-item::before { content: "→"; position: absolute; left: 0; color: var(--green); }
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: center;
-      margin-top: 1.2rem;
-    }
+  .cert { margin: 4px 0; }
+  .cert .ok { color: var(--green-bright); }
+  .cert a { color: var(--blue); text-decoration: none; }
+  .cert a:hover { text-decoration: underline; }
+  .cert .issuer { color: var(--muted); font-size: 13px; }
 
-    .tag {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      color: #d2e3d4;
-    }
+  .hobbies { color: var(--yellow); }
 
-    .section {
-      display: none;
-      max-width: 700px;
-      text-align: center;
-      width: 100%;
-    }
+  .footer-cmd { margin-top: 28px; }
+  .cursor {
+    display: inline-block;
+    width: 9px; height: 17px;
+    background: var(--green);
+    vertical-align: middle;
+    margin-left: 4px;
+    animation: blink 1.1s step-start infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
 
-    .section.active {
-      display: block;
-    }
+  .badges { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .badges a { display: inline-block; }
+  .badges img { display: block; height: 26px; }
 
-    .sobre-content {
-      text-align: left;
-      line-height: 1.8;
-    }
-
-    .sobre-content h2 {
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-
-    .sobre-content p {
-      margin-bottom: 1rem;
-      color: #d2e3d4;
-    }
-
-    .sobre-content .highlight {
-      color: #e6ede7;
-      font-weight: 500;
-    }
-
-    .contato-links {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin-top: 1.5rem;
-      align-items: center;
-    }
-
-    .contato-links a {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      color: #d2e3d4;
-      text-decoration: none;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      width: 280px;
-      transition: background 0.2s;
-    }
-
-    .contato-links a:hover {
-      background: rgba(255,255,255,0.15);
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.15);
-      color: #c7d3c8;
-    }
-  </style>
+  @media (max-width: 600px) {
+    body { padding: 10px; }
+    .screen { padding: 18px 16px 26px; font-size: 13.5px; }
+    .stack-row .cat { min-width: 120px; }
+    .kv .label { min-width: 90px; }
+  }
+</style>
 </head>
 <body>
-
-  <header>
-    <div>Vinicius Sena</div>
-    <nav>
-      <a onclick="showSection('welcome')">Início</a>
-      <a onclick="showSection('posts')">Posts</a>
-      <a onclick="showSection('projetos')">Projetos</a>
-      <a onclick="showSection('contato')">Contato</a>
-    </nav>
-  </header>
-
-  <main id="main">
-
-    <div id="welcome" class="welcome active">
-      <h1>Bem vindo.</h1><p><h2>Sou o Vini 🤟</h2>
-      <p class="subtitle">Analista de Observabilidade → DevOps/SRE</p>
-      <p class="description">
-        Aqui documento minha jornada de transição para DevOps/SRE — estudos, projetos práticos e reflexões sobre tecnologia e carreira.
-      </p>
-      <div class="tags">
-        <span class="tag">Linux</span>
-        <span class="tag">Docker</span>
-        <span class="tag">Kubernetes</span>
-        <span class="tag">Terraform</span>
-        <span class="tag">Grafana</span>
-        <span class="tag">Datadog</span>
-        <span class="tag">CI/CD</span>
-        <span class="tag">AWS</span>
+  <div class="terminal">
+    <div class="titlebar">
+      <div class="controls">
+        <span class="dot r"></span>
+        <span class="dot y"></span>
+        <span class="dot g"></span>
       </div>
+      <div class="tabname">❯_ viniciussena@Vini: <span class="pwd">~</span></div>
+      <button class="lang-toggle" id="langBtn">EN</button>
     </div>
 
-    <div id="posts" class="section">
-      <h2>Posts</h2>
-      <p>Em breve vou começar a publicar meus estudos e reflexões aqui.</p>
-    </div>
+    <div class="screen">
 
-    <div id="projetos" class="section">
-      <h2>Projetos</h2>
-      <p>Aqui vou compartilhar projetos práticos que estou desenvolvendo.</p>
-    </div>
-
-    <div id="contato" class="section">
-      <h2>Contato</h2>
-      <p style="color:#c7d3c8; margin-bottom: 0.5rem;">Bora trocar uma ideia? Me encontro por aqui:</p>
-      <div class="contato-links">
-        <a href="http://linkedin.com/in/viniciussena000" target="_blank">
-          <i class="fa-brands fa-linkedin"></i> LinkedIn
-        </a>
-        <a href="https://github.com/viniciussenaa" target="_blank">
-          <i class="fa-brands fa-github"></i> GitHub
-        </a>
-        <a href="https://discord.com/users/360037949141811201" target="_blank">
-          <i class="fa-brands fa-discord"></i> Discord
-        </a>
-        <a href="mailto:viniciussena000@gmail.com">
-          <i class="fa-solid fa-envelope"></i> viniciussena000@gmail.com
-        </a>
+      <!-- whoami -->
+      <div class="prompt-line"><span class="user">viniciussena@Vini</span><span class="path">:~</span><span class="dollar">$</span> <span class="cmd">whoami</span></div>
+      <div class="output">
+        <h1 class="name">Vinicius Sena</h1>
+        <div class="role">Analista de Observabilidade → DevOps/SRE em formação</div>
+        <div class="kv"><span class="label">localização</span>São José dos Campos, SP · Brasil 🇧🇷</div>
+        <div class="kv"><span class="label">empresa</span><a href="https://dm.com.br" target="_blank" rel="noopener">DM</a></div>
+        <div class="kv"><span class="label">e-mail</span><a href="mailto:viniciussena000@gmail.com">viniciussena000@gmail.com</a></div>
+        <div class="kv"><span class="label">github</span><a href="https://github.com/viniciussenaa" target="_blank" rel="noopener">github.com/viniciussenaa</a></div>
+        <div class="kv"><span class="label">linkedin</span><a href="https://linkedin.com/in/viniciussena000" target="_blank" rel="noopener">linkedin.com/in/viniciussena000</a></div>
+        <div class="kv"><span class="label">blog</span><a href="https://viniciussenaa.github.io" target="_blank" rel="noopener">viniciussenaa.github.io</a></div>
+        <div class="desc">
+          Atuo há <em>5 anos com Observabilidade</em> — criando monitoramentos, investigando falhas
+          e garantindo a saúde de ambientes de produção. Em transição para <em>DevOps/SRE</em>,
+          uma evolução natural de quem sempre quis entender não só <em>o que</em> está quebrando,
+          mas <em>por que</em> e <em>como evitar</em> que quebre. Documento toda essa jornada no blog.
+        </div>
       </div>
+
+      <!-- stack -->
+      <div class="prompt-line"><span class="user">viniciussena@Vini</span><span class="path">:~</span><span class="dollar">$</span> <span class="cmd">cat stack.conf</span></div>
+      <div class="output">
+        <div class="stack-row"><span class="cat">observability</span><span class="vals">Zabbix <span class="dotsep">·</span> Grafana <span class="dotsep">·</span> Prometheus <span class="dotsep">·</span> Datadog</span></div>
+        <div class="stack-row"><span class="cat">cloud & iac</span><span class="vals">AWS <span class="dotsep">·</span> Terraform <span class="dotsep">·</span> Docker</span></div>
+        <div class="stack-row"><span class="cat">kubernetes</span><span class="vals">k8s <span class="dotsep">·</span> em estudo</span></div>
+        <div class="stack-row"><span class="cat">ci/cd</span><span class="vals">GitHub Actions</span></div>
+        <div class="stack-row"><span class="cat">linguagens</span><span class="vals">Python <span class="dotsep">·</span> Go <span class="dotsep">·</span> Bash</span></div>
+        <div class="stack-row"><span class="cat">os</span><span class="vals">Linux</span></div>
+      </div>
+
+      <!-- learning -->
+      <div class="prompt-line"><span class="user">viniciussena@Vini</span><span class="path">:~</span><span class="dollar">$</span> <span class="cmd">cat learning.log</span></div>
+      <div class="output">
+        <div class="exp-item">Aprofundando em Kubernetes — orquestração, deploys e operações.</div>
+        <div class="exp-item">Estudando IaC com Terraform e padrões GitOps.</div>
+        <div class="exp-item">Praticando automação de pipelines com GitHub Actions.</div>
+        <div class="exp-item">Explorando AWS e arquiteturas cloud-native.</div>
+      </div>
+
+      <!-- certifications -->
+      <div class="prompt-line"><span class="user">viniciussena@Vini</span><span class="path">:~</span><span class="dollar">$</span> <span class="cmd">ls certifications/</span></div>
+      <div class="output">
+        <div class="cert"><span class="ok">✓</span> Em construção <span class="issuer">— rumo às certificações DevOps/Cloud</span></div>
+      </div>
+
+      <!-- hobbies -->
+      <div class="prompt-line"><span class="user">viniciussena@Vini</span><span class="path">:~</span><span class="dollar">$</span> <span class="cmd">cat hobbies.txt</span></div>
+      <div class="output">
+        <div class="hobbies">tech blogging · open source · investigar falhas · café · aprender coisas novas</div>
+      </div>
+
+      <!-- contact / social badges -->
+      <div class="prompt-line"><span class="user">viniciussena@Vini</span><span class="path">:~</span><span class="dollar">$</span> <span class="cmd">./contact.sh</span></div>
+      <div class="output">
+        <div class="badges">
+          <a href="https://linkedin.com/in/viniciussena000" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+          <a href="https://github.com/viniciussenaa" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" /></a>
+          <a href="mailto:viniciussena000@gmail.com"><img src="https://img.shields.io/badge/Gmail-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail" /></a>
+          <a href="https://discord.com/users/360037949141811201" target="_blank" rel="noopener"><img src="https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white" alt="Discord" /></a>
+        </div>
+      </div>
+
+      <!-- final prompt -->
+      <div class="prompt-line footer-cmd"><span class="user">viniciussena@Vini</span><span class="path">:~</span><span class="dollar">$</span> <span class="cursor"></span></div>
+
     </div>
-
-  </main>
-
-  <footer>
-    <p>© 2026 Vinicius Sena</p>
-  </footer>
+  </div>
 
   <script>
-    function showSection(sectionId) {
-      const welcome = document.getElementById('welcome');
-      const sections = document.querySelectorAll('.section');
-      const main = document.getElementById('main');
-
-      // esconde tudo
-      welcome.classList.remove('active');
-      sections.forEach(sec => sec.classList.remove('active'));
-
-      // mostra apenas a seção clicada
-      if (sectionId === 'welcome') {
-        welcome.classList.add('active');
-        main.classList.remove('top-align');
-      } else {
-        document.getElementById(sectionId).classList.add('active');
-        main.classList.add('top-align');
-      }
-    }
+    // Simple EN/PT toggle for the language button (visual only placeholder)
+    const btn = document.getElementById('langBtn');
+    let pt = true;
+    btn.addEventListener('click', function () {
+      pt = !pt;
+      btn.textContent = pt ? 'EN' : 'PT';
+      // (Optional) você pode implementar i18n completo depois.
+    });
   </script>
-
 </body>
 </html>
