@@ -1,54 +1,137 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Título do Post · Vinicius Sena</title>
+  <title>Investigation Title · Threat Traces</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../style.css">
 </head>
+
 <body>
 <div class="container">
 
   <header>
-    <h1>Vinicius Sena</h1>
-    <p>NOC → SRE · DevOps · Linux · Redes · Programação · DevSecOps</p>
+    <h1>Threat Traces</h1>
+    <p>
+      Following the evidence through Cyber Threat Intelligence,
+      Digital Forensics, Incident Response, Threat Hunting, and Malware Analysis.
+    </p>
+
     <nav>
-      <a href="../index.html">home</a>
-      <a href="../sobre.html">sobre</a>
+      <a href="../index.html">Home</a>
+      <a href="../about.html">About</a>
     </nav>
   </header>
 
   <div class="post-wrapper">
-    <a href="../index.html" class="back">← voltar</a>
 
-    <h1>Título do Post Aqui</h1>
-    <div class="post-meta">dd/mm/aaaa · categoria</div>
+    <a href="../index.html" class="back">← Back to investigations</a>
+
+    <h1>Investigation Title</h1>
+
+    <div class="post-meta">
+      20 Aug 2026 · Threat Hunting
+    </div>
+
+    <div class="report">
+
+      <div class="report-header">
+        <span class="case-id">TT-2026-001</span>
+        <span class="badge">Threat Hunting</span>
+      </div>
+
+      <p><strong>Status:</strong> Completed</p>
+      <p><strong>MITRE ATT&CK:</strong> T1059 – Command and Scripting Interpreter</p>
+      <p><strong>Platform:</strong> Windows</p>
+
+    </div>
 
     <div class="post-content">
 
-      <p>Parágrafo de introdução do post.</p>
+      <h2>Objective</h2>
 
-      <h2>Seção 1</h2>
-      <p>Conteúdo da seção 1.</p>
+      <p>
+        Briefly describe what is being investigated and why it matters.
+      </p>
 
-      <h2>Seção 2</h2>
-      <p>Conteúdo da seção 2. Exemplo de <code>código inline</code> no meio do texto.</p>
+      <blockquote>
+        Every investigation starts with evidence—not assumptions.
+      </blockquote>
 
-      <pre><code># Exemplo de bloco de código
-echo "Hello, SRE!"
-ls -lah /etc/systemd/system/</code></pre>
+      <h2>Initial Evidence</h2>
 
-      <h2>Conclusão</h2>
-      <p>Fechamento do post.</p>
+      <p>
+        Describe the first indicators, logs, alerts or suspicious behavior that triggered the investigation.
+      </p>
 
-      <blockquote>Citação ou nota importante aqui.</blockquote>
+      <ul>
+        <li>PowerShell execution</li>
+        <li>Suspicious process tree</li>
+        <li>Unusual outbound connection</li>
+      </ul>
+
+      <h2>Investigation Timeline</h2>
+
+      <p>Document the sequence of events.</p>
+
+      <pre><code>[10:42] Alert triggered
+[10:44] Process identified
+[10:47] Network connection observed
+[10:53] IOC correlated
+[11:08] Investigation completed</code></pre>
+
+      <h2>Technical Analysis</h2>
+
+      <p>
+        Explain the technical details, forensic artifacts, ATT&CK mapping,
+        or malware behavior.
+      </p>
+
+      <pre><code># Example command
+
+wevtutil qe Security /c:10</code></pre>
+
+      <h2>Indicators of Compromise</h2>
+
+      <ul>
+        <li>IP: 192.168.1.100</li>
+        <li>SHA256: examplehash</li>
+        <li>Domain: example.com</li>
+      </ul>
+
+      <h2>Detection Opportunities</h2>
+
+      <p>Describe how defenders could detect similar activity.</p>
+
+      <pre><code>title: Suspicious Encoded PowerShell
+logsource:
+  category: process_creation
+
+detection:
+  selection:
+    CommandLine|contains: "-EncodedCommand"
+
+condition: selection</code></pre>
+
+      <h2>Lessons Learned</h2>
+
+      <p>
+        Summarize the key takeaways from the investigation.
+      </p>
+
+      <blockquote>
+        Follow the evidence until the attack makes sense.
+      </blockquote>
 
     </div>
+
   </div>
 
-  <footer>viniciussenaa.github.io</footer>
+  <footer>threattraces.github.io</footer>
+
 </div>
 </body>
 </html>
